@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Wishlist extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['user_id', 'konser_id'];
+
+    // Relasi balik ke User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Relasi ke Model Konser kamu
+    public function konser()
+    {
+        return $this->belongsTo(Konser::class);
+    }
+}
