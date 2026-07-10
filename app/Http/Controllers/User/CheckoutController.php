@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Tiket;
-use App\Models\ActivityLog; // <-- 1. PASTIKAN MODEL LOG SUDAH DI-IMPORT DI SINI
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,7 +27,7 @@ class CheckoutController extends Controller
             'email_pemesan' => 'required|email|max:255',
         ]);
 
-        $tiket = Tiket::with('konser')->findOrFail($request->tiket_id); // Load relasi konser sekalian
+        $tiket = Tiket::with('konser')->findOrFail($request->tiket_id);
         $sisa  = $tiket->kuota - $tiket->terjual;
 
         if ($sisa < $request->jumlah) {
@@ -36,13 +36,14 @@ class CheckoutController extends Controller
 
         $subtotal = $tiket->harga * $request->jumlah;
 
+        // ALUR PROFESIONAL: Set status awal menjadi 'pending' (menunggu bayar)
         $order = Order::create([
             'user_id'       => auth()->id(),
             'kode_order'    => 'ORD-' . strtoupper(Str::random(8)),
             'nama_pemesan'  => $request->nama_pemesan,
             'email_pemesan' => $request->email_pemesan,
             'total_harga'   => $subtotal,
-            'status'        => 'paid',
+            'status'        => 'pending', 
         ]);
 
         OrderItem::create([
@@ -53,16 +54,59 @@ class CheckoutController extends Controller
             'subtotal'     => $subtotal,
         ]);
 
+        // Kuota langsung dikunci/dikurangi sementara biar ga ditikung user lain
         $tiket->increment('terjual', $request->jumlah);
 
-        // <-- 2. POSISI TERBAIK: Catat log aktivitas setelah transaksi selesai dibuat
         ActivityLog::catat(
             auth()->id(), 
-            "Berhasil membeli " . $request->jumlah . " tiket " . $tiket->kategori . " untuk konser: " . $tiket->konser->nama_konser
+            "Membuat pesanan " . $request->jumlah . " tiket " . ($tiket->kategori ?? $tiket->nama_tiket) . " untuk konser: " . $tiket->konser->nama_konser
         );
 
-        return redirect()->route('user.order.success', $order)
-                         ->with('success', 'Pemesanan berhasil! Selamat menikmati konsernya! 🎉');
+        // FIX: Diarahkan ke nama route yang benar sesuai web.php (user.checkout.show)
+        return redirect()->route('user.checkout.show', $order->id)
+                         ->with('success', 'Pesanan berhasil dibuat! Silakan selesaikan pembayaran dalam 15 menit. 🎉');
+    }
+
+    public function show($id)
+    {
+        // Gunakan eagers loading 'items.tiket' karena data tiket dibungkus di dalam OrderItem
+        $order = Order::with('items.tiket.konser')->findOrFail($id);
+
+        // LOGIKA OTOMATIS EXPIRED 15 MENIT
+        if ($order->status === 'pending') {
+            $waktuOrder = \Carbon\Carbon::parse($order->created_at);
+            $waktuHabis = $waktuOrder->addMinutes(15);
+
+            if (now()->greaterThan($waktuHabis)) {
+                // 1. Ubah status order jadi expired
+                $order->update(['status' => 'expired']);
+
+                // 2. Kembalikan kuota tiket lewat items order
+                foreach ($order->items as $item) {
+                    $item->tiket->decrement('terjual', $item->jumlah);
+                }
+
+                ActivityLog::catat(auth()->id(), "Pesanan " . $order->kode_order . " otomatis hangus karena melewati batas waktu.");
+                session()->flash('error', 'Waktu pembayaran Anda telah habis! Tiket otomatis dibatalkan.');
+            }
+        }
+
+        return view('user.checkout-show', compact('order'));
+    }
+
+    // Fitur simulasi tombol bayar manual (Khusus Demo Presentasi)
+    public function bayarManual(Order $order)
+    {
+        if ($order->user_id !== auth()->id() || $order->status !== 'pending') {
+            abort(403);
+        }
+
+        $order->update(['status' => 'paid']);
+
+        ActivityLog::catat(auth()->id(), "Berhasil melunasi pembayaran tiket " . $order->kode_order);
+
+        return redirect()->route('user.order.success', $order->id)
+                         ->with('success', 'Pembayaran berhasil dikonfirmasi! 🎉');
     }
 
     public function success(Order $order)
@@ -86,13 +130,18 @@ class CheckoutController extends Controller
         }
 
         $order->load('items.tiket.konser');
-        // Ambil nama konser sebelum datanya dihapus untuk keperluan teks di log
         $namaKonser = $order->items->first()->tiket->konser->nama_konser ?? 'Konser';
+
+        // Jika riwayat yang dihapus masih pending/belum dibayar, kembalikan kuota dulu
+        if ($order->status === 'pending') {
+            foreach ($order->items as $item) {
+                $item->tiket->decrement('terjual', $item->jumlah);
+            }
+        }
 
         $order->items()->delete();
         $order->delete();
 
-        // <-- 3. POSISI KEDUA: Catat log ketika user menghapus riwayat pesanan tiket mereka
         ActivityLog::catat(auth()->id(), "Menghapus riwayat transaksi " . $order->kode_order . " (Konser: " . $namaKonser . ")");
 
         return back()->with('success', 'Riwayat tiket berhasil dihapus!');
@@ -105,12 +154,32 @@ class CheckoutController extends Controller
         }
 
         $order->load('items.tiket.konser');
-        
-        // <-- OPTIONAL: Kalau kamu mau catat setiap kali user download PDF tiketnya, bisa selipin di sini:
-        // ActivityLog::catat(auth()->id(), "Mengunduh file PDF e-tiket " . $order->kode_order);
-
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('user.tiket-pdf', compact('order'));
-
         return $pdf->download('tiket-' . $order->kode_order . '.pdf');
+    }
+
+   public function batalManual(Order $order)
+    {
+        // Validasi pemilik
+        if ($order->user_id !== auth()->id() || $order->status !== 'pending') {
+            abort(403);
+        }
+
+        $order->load('items.tiket');
+
+        // 1. Kembalikan kuota tiket ke jumlah semula
+        foreach ($order->items as $item) {
+            $item->tiket->decrement('terjual', $item->jumlah);
+        }
+
+        // 2. Catat log aktivitas sebelum dihapus
+        ActivityLog::catat(auth()->id(), "Membatalkan pesanan " . $order->kode_order . " (Tiket dihapus dari sistem).");
+
+        // 3. Hapus item dan order secara bersih dari database (Bebas dari CHECK Constraint SQLite!)
+        $order->items()->delete();
+        $order->delete();
+
+        return redirect()->route('user.home')
+                         ->with('success', 'Pesanan Anda berhasil dibatalkan dan kuota tiket telah dilepas! ❌');
     }
 }

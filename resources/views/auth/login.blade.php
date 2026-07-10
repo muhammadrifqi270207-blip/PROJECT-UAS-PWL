@@ -7,63 +7,83 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body class="bg-gray-950 min-h-screen flex items-center justify-center">
+<body class="bg-[#090d16] text-white min-h-screen flex flex-col items-center justify-center font-sans px-4 relative py-12">
 
-<div class="w-full max-w-md px-6">
-
-    {{-- LOGO --}}
-    <div class="text-center mb-8">
-        <span class="text-5xl">🎵</span>
-        <h1 class="text-3xl font-bold text-purple-400 mt-2">Embud Creative</h1>
-        <p class="text-gray-400 text-sm mt-1">Masuk ke akun kamu</p>
+    <!-- Tombol Kembali Ke Landing Page -->
+    <div class="w-full max-w-md mx-auto mb-2 text-left">
+        <a href="/" class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-pink-400 font-semibold transition group bg-[#111827]/40 border border-white/5 px-4 py-2 rounded-xl backdrop-blur-md">
+            <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i> 
+            Kembali ke Beranda
+        </a>
     </div>
 
-    {{-- CARD --}}
-    <div class="bg-gray-900 border border-gray-700 rounded-2xl p-8">
-
-        @if($errors->any())
-        <div class="bg-red-900 border border-red-600 text-red-300 px-4 py-3 rounded-lg mb-4 text-sm">
-            <i class="fas fa-exclamation-circle mr-2"></i>{{ $errors->first() }}
+    <!-- Container Utama Form -->
+    <div class="w-full max-w-md mx-auto flex flex-col items-center">
+        
+        <!-- Logo & Header -->
+        <div class="mb-2 text-center">
+            <span class="text-4xl inline-block animate-bounce mb-2">🎸</span>
+            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 tracking-tight">
+                Embud Creative
+            </h1>
+            <p class="text-gray-400 text-xs mt-1">Masuk ke akun kamu</p>
         </div>
-        @endif
 
-        <form action="/login" method="POST" class="space-y-5">
-            @csrf
-
-            <div>
-                <label class="text-gray-300 text-sm block mb-2">
-                    <i class="fas fa-envelope mr-1"></i> Email
-                </label>
-                <input type="email" name="email" value="{{ old('email') }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition"
-                       placeholder="email@kamu.com">
+        <!-- Box Form Card -->
+        <div class="w-full bg-[#111827]/60 border border-white/5 rounded-2xl p-8 shadow-2xl backdrop-blur-xl mt-6">
+            
+            <!-- Alert Error Validasi Laravel -->
+            @if($errors->any())
+            <div class="bg-red-950/80 border border-red-800 text-red-400 px-4 py-3 rounded-xl mb-5 text-xs flex items-center gap-2">
+                <i class="fas fa-exclamation-circle text-sm"></i>
+                <span>{{ $errors->first() }}</span>
             </div>
+            @endif
 
-            <div>
-                <label class="text-gray-300 text-sm block mb-2">
-                    <i class="fas fa-lock mr-1"></i> Password
-                </label>
-                <input type="password" name="password"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none transition"
-                       placeholder="••••••••">
+            <form action="/login" method="POST" class="space-y-5">
+                @csrf
+                
+                <!-- Input Email -->
+                <div>
+                    <label class="block text-gray-400 text-xs font-semibold mb-2 flex items-center gap-2">
+                        <i class="fas fa-envelope text-pink-400"></i> Email
+                    </label>
+                    <input type="email" name="email" value="{{ old('email') }}" placeholder="email@kamu.com" 
+                           class="w-full bg-[#1f2937]/50 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition" required />
+                </div>
+                
+                <!-- Input Password -->
+                <div>
+                    <label class="block text-gray-400 text-xs font-semibold mb-2 flex items-center gap-2">
+                        <i class="fas fa-lock text-pink-400"></i> Password
+                    </label>
+                    <input type="password" name="password" placeholder="••••••••" 
+                           class="w-full bg-[#1f2937]/50 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition" required />
+                </div>
+                
+                <!-- Remember Me Checkbox -->
+                <div class="flex items-center gap-2 px-1">
+                    <input type="checkbox" name="remember" id="remember" class="accent-pink-500 h-4 w-4 bg-[#1f2937] border-white/10 rounded text-pink-600">
+                    <label for="remember" class="text-gray-400 text-xs select-none">Ingat saya</label>
+                </div>
+                
+                <!-- Tombol Submit Masuk -->
+                <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3.5 rounded-xl text-sm transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg shadow-pink-600/20">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
+            </form>
+
+            <!-- Link Pindah ke Register -->
+            <div class="text-center mt-6">
+                <p class="text-gray-400 text-xs">
+                    Belum punya akun? 
+                    <a href="{{ route('register') }}" class="text-pink-400 hover:text-pink-300 font-bold hover:underline ml-1">
+                        Daftar sekarang!
+                    </a>
+                </p>
             </div>
-
-            <div class="flex items-center gap-2">
-                <input type="checkbox" name="remember" id="remember" class="accent-purple-500">
-                <label for="remember" class="text-gray-400 text-sm">Ingat saya</label>
-            </div>
-
-            <button type="submit"
-                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-bold transition text-lg">
-                <i class="fas fa-sign-in-alt mr-2"></i>Masuk
-            </button>
-        </form>
-
-        <p class="text-center text-gray-400 text-sm mt-6">
-            Belum punya akun?
-            <a href="{{ route('register') }}" class="text-purple-400 hover:underline font-medium">Daftar sekarang!</a>
-        </p>
+        </div>
     </div>
-</div>
+
 </body>
 </html>

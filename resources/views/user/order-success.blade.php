@@ -15,7 +15,7 @@
     {{-- DETAIL ORDER --}}
     <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 text-left mb-6">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold text-purple-400">Detail Pesanan</h2>
+            <h2 class="text-lg font-bold text-pink-400">Detail Pesanan</h2>
             <span class="bg-green-900 text-green-400 text-xs px-3 py-1 rounded-full font-bold">
                 {{ ucfirst($order->status) }}
             </span>
@@ -24,7 +24,7 @@
         <div class="space-y-3 text-sm">
             <div class="flex justify-between">
                 <span class="text-gray-400">Kode Order</span>
-                <span class="text-purple-400 font-extrabold tracking-wider">{{ $order->kode_order }}</span>
+                <span class="text-pink-400 font-extrabold tracking-wider">{{ $order->kode_order }}</span>
             </div>
             <div class="flex justify-between">
                 <span class="text-gray-400">Nama Pemesan</span>
@@ -62,14 +62,14 @@
             <div class="inline-block bg-white p-4 rounded-xl">
                 {!! QrCode::size(180)->generate($order->kode_order) !!}
             </div>
-            <p class="text-purple-400 font-bold tracking-widest mt-2">{{ $order->kode_order }}</p>
+            <p class="text-pink-400 font-bold tracking-widest mt-2">{{ $order->kode_order }}</p>
         </div>
     </div>
 
     {{-- TOMBOL --}}
     <div class="flex gap-4 justify-center">
         <a href="{{ route('user.orders.my') }}"
-           class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl font-bold transition">
+           class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-xl font-bold transition">
             <i class="fas fa-ticket mr-2"></i>Lihat Tiket Saya
         </a>
         <a href="{{ route('user.home') }}"

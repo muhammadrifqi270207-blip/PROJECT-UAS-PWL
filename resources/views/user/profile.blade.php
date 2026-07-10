@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto">
-    <h1 class="text-3xl font-bold text-blue-400 mb-6">
+    <h1 class="text-3xl font-bold text-pink-400 mb-6">
         <i class="fas fa-user-edit mr-2"></i>Edit Profil
     </h1>
 
@@ -13,9 +13,9 @@
             <div class="relative">
                 @if(auth()->user()->foto_profil)
                 <img src="{{ asset('storage/' . auth()->user()->foto_profil) }}"
-                     class="w-24 h-24 rounded-full object-cover border-4 border-blue-600">
+                     class="w-24 h-24 rounded-full object-cover border-4 border-pink-600">
                 @else
-                <div class="w-24 h-24 bg-blue-700 rounded-full flex items-center justify-center text-3xl font-bold border-4 border-blue-600">
+                <div class="w-24 h-24 bg-pink-700 rounded-full flex items-center justify-center text-3xl font-bold border-4 border-pink-600">
                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                 </div>
                 @endif
@@ -23,7 +23,7 @@
             <div>
                 <p class="text-white text-xl font-bold">{{ auth()->user()->name }}</p>
                 <p class="text-gray-400 text-sm">{{ auth()->user()->email }}</p>
-                <span class="bg-blue-900 text-blue-400 text-xs px-3 py-1 rounded-full font-bold mt-2 inline-block">
+                <span class="bg-pink-900 text-pink-400 text-xs px-3 py-1 rounded-full font-bold mt-2 inline-block">
                     {{ ucfirst(auth()->user()->role) }}
                 </span>
             </div>
@@ -36,28 +36,28 @@
             <div class="mb-4">
                 <label class="text-gray-300 text-sm block mb-2">Nama</label>
                 <input type="text" name="name" value="{{ old('name', auth()->user()->name) }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none">
+                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                 @error('name')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div class="mb-4">
                 <label class="text-gray-300 text-sm block mb-2">Email</label>
                 <input type="email" name="email" value="{{ old('email', auth()->user()->email) }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none">
+                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                 @error('email')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div class="mb-6">
                 <label class="text-gray-300 text-sm block mb-2">Foto Profil</label>
                 <input type="file" name="foto_profil" accept="image/*"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none"
+                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none"
                        onchange="previewFoto(this)">
-                <img id="preview-foto" src="" class="mt-3 w-20 h-20 rounded-full object-cover hidden border-4 border-blue-600">
+                <img id="preview-foto" src="" class="mt-3 w-20 h-20 rounded-full object-cover hidden border-4 border-pink-600">
                 @error('foto_profil')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
             <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold transition">
+                    class="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-xl font-bold transition">
                 <i class="fas fa-save mr-2"></i>Simpan Perubahan
             </button>
         </form>
@@ -65,7 +65,7 @@
 
     {{-- Form Ganti Password --}}
     <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6">
-        <h2 class="text-xl font-bold text-blue-400 mb-4">
+        <h2 class="text-xl font-bold text-pink-400 mb-4">
             <i class="fas fa-lock mr-2"></i>Ganti Password
         </h2>
 
@@ -76,7 +76,7 @@
                 <label class="text-gray-300 text-sm block mb-2">Password Lama</label>
                 <div class="relative">
                     <input type="password" name="password_lama" id="pass_lama"
-                           class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none pr-12">
+                           class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none pr-12">
                     <button type="button" onclick="togglePass('pass_lama', 'eye_lama')"
                             class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
                         <i id="eye_lama" class="fas fa-eye"></i>
@@ -88,7 +88,7 @@
                 <label class="text-gray-300 text-sm block mb-2">Password Baru</label>
                 <div class="relative">
                     <input type="password" name="password" id="pass_baru"
-                           class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none pr-12">
+                           class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none pr-12">
                     <button type="button" onclick="togglePass('pass_baru', 'eye_baru')"
                             class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
                         <i id="eye_baru" class="fas fa-eye"></i>
@@ -100,7 +100,7 @@
                 <label class="text-gray-300 text-sm block mb-2">Konfirmasi Password Baru</label>
                 <div class="relative">
                     <input type="password" name="password_confirmation" id="pass_konfirm"
-                           class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none pr-12">
+                           class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none pr-12">
                     <button type="button" onclick="togglePass('pass_konfirm', 'eye_konfirm')"
                             class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
                         <i id="eye_konfirm" class="fas fa-eye"></i>

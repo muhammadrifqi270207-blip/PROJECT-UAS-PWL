@@ -4,13 +4,13 @@
 @section('content')
 <div class="flex items-center justify-between mb-6">
     <div>
-        <h1 class="text-3xl font-bold text-purple-400">
+        <h1 class="text-3xl font-bold text-pink-400">
             <i class="fas fa-ticket mr-2"></i>Daftar Tiket
         </h1>
         <p class="text-gray-400 mt-1">Kelola semua kategori tiket konser</p>
     </div>
     <a href="{{ route('tiket.create') }}"
-       class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
+       class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
         <i class="fas fa-plus"></i> Tambah Tiket Baru
     </a>
 </div>
@@ -35,7 +35,7 @@
                 <td class="px-4 py-3 text-gray-400">{{ $loop->iteration }}</td>
                 <td class="px-4 py-3 font-medium">{{ $tiket->konser->nama_konser }}</td>
                 <td class="px-4 py-3">
-                    <span class="px-2 py-1 bg-purple-900 text-purple-300 rounded text-xs font-bold">
+                    <span class="px-2 py-1 bg-pink-900 text-pink-300 rounded text-xs font-bold">
                         {{ $tiket->kategori }}
                     </span>
                 </td>
@@ -64,7 +64,7 @@
             @empty
             <tr>
                 <td colspan="8" class="px-4 py-8 text-center text-gray-500">
-                    Belum ada data tiket. <a href="{{ route('tiket.create') }}" class="text-purple-400">Tambah sekarang</a>
+                    Belum ada data tiket. <a href="{{ route('tiket.create') }}" class="text-pink-400">Tambah sekarang</a>
                 </td>
             </tr>
             @endforelse

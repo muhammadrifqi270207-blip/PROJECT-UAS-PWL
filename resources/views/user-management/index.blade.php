@@ -4,7 +4,7 @@
 @section('content')
 <div class="mb-8 flex items-center justify-between">
     <div>
-        <h1 class="text-3xl font-bold text-purple-400">
+        <h1 class="text-3xl font-bold text-pink-400">
             <i class="fas fa-users mr-2"></i>Manajemen User
         </h1>
         <p class="text-gray-400 mt-1">Kelola semua user yang terdaftar</p>
@@ -13,14 +13,14 @@
 
 {{-- STATS --}}
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <div class="bg-gray-900 border border-purple-800 rounded-xl p-6">
+    <div class="bg-gray-900 border border-pink-800 rounded-xl p-6">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-gray-400 text-sm">Total User</p>
                 <p class="text-3xl font-bold text-white mt-1">{{ $totalUser }}</p>
             </div>
-            <div class="bg-purple-900 p-3 rounded-lg">
-                <i class="fas fa-users text-purple-400 text-xl"></i>
+            <div class="bg-pink-900 p-3 rounded-lg">
+                <i class="fas fa-users text-pink-400 text-xl"></i>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
 
 {{-- TABEL USER --}}
 <div class="bg-gray-900 border border-gray-700 rounded-xl p-6">
-    <h2 class="text-xl font-bold text-purple-400 mb-4">
+    <h2 class="text-xl font-bold text-pink-400 mb-4">
         <i class="fas fa-list mr-2"></i>Daftar User
     </h2>
     <table class="w-full text-sm">
@@ -60,7 +60,7 @@
                 <td class="py-3 text-gray-400">{{ $i + 1 }}</td>
                 <td class="py-3">
                     <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center font-bold text-xs">
+                        <div class="w-8 h-8 bg-pink-700 rounded-full flex items-center justify-center font-bold text-xs">
                             {{ strtoupper(substr($user->name, 0, 1)) }}
                         </div>
                         <span class="font-medium text-white">{{ $user->name }}</span>
@@ -68,7 +68,7 @@
                 </td>
                 <td class="py-3 text-gray-400">{{ $user->email }}</td>
                 <td class="py-3">
-                    <span class="bg-purple-900 text-purple-300 text-xs px-2 py-1 rounded-full font-bold">
+                    <span class="bg-pink-900 text-pink-300 text-xs px-2 py-1 rounded-full font-bold">
                         {{ $user->orders_count }} order
                     </span>
                 </td>

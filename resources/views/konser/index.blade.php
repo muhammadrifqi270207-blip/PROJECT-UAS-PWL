@@ -4,13 +4,13 @@
 @section('content')
 <div class="flex items-center justify-between mb-6">
     <div>
-        <h1 class="text-3xl font-bold text-purple-400">
+        <h1 class="text-3xl font-bold text-pink-400">
             <i class="fas fa-music mr-2"></i>Daftar Konser
         </h1>
         <p class="text-gray-400 mt-1">Kelola semua data konser di sini</p>
     </div>
     <a href="{{ route('konser.create') }}"
-       class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
+       class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
         <i class="fas fa-plus"></i> Tambah Konser Baru
     </a>
 </div>
@@ -59,7 +59,7 @@
                 </td>
                 <td class="px-4 py-3 flex gap-2">
                     <a href="{{ route('konser.show', $konser) }}"
-                       class="bg-blue-700 hover:bg-blue-600 text-white px-2 py-1 rounded text-xs">
+                       class="bg-pink-700 hover:bg-pink-600 text-white px-2 py-1 rounded text-xs">
                         <i class="fas fa-eye"></i>
                     </a>
                     <a href="{{ route('konser.edit', $konser) }}"
@@ -78,7 +78,7 @@
             @empty
             <tr>
                 <td colspan="7" class="px-4 py-8 text-center text-gray-500">
-                    Belum ada data konser. <a href="{{ route('konser.create') }}" class="text-purple-400">Tambah sekarang</a>
+                    Belum ada data konser. <a href="{{ route('konser.create') }}" class="text-pink-400">Tambah sekarang</a>
                 </td>
             </tr>
             @endforelse

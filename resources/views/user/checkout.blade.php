@@ -6,7 +6,7 @@
     <a href="{{ route('user.konser.show', $tiket->konser) }}" class="text-gray-400 hover:text-white text-sm">
         <i class="fas fa-arrow-left mr-1"></i> Kembali
     </a>
-    <h1 class="text-3xl font-bold text-purple-400 mt-2">
+    <h1 class="text-3xl font-bold text-pink-400 mt-2">
         <i class="fas fa-shopping-cart mr-2"></i>Checkout Tiket
     </h1>
 </div>
@@ -34,7 +34,7 @@
                 <label class="text-gray-300 text-sm block mb-2">Nama Pemesan</label>
                 <input type="text" name="nama_pemesan"
                        value="{{ old('nama_pemesan', auth()->user()->name) }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-purple-500 focus:outline-none">
+                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                 @error('nama_pemesan')
                 <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -45,7 +45,7 @@
                 <label class="text-gray-300 text-sm block mb-2">Email</label>
                 <input type="email" name="email_pemesan"
                        value="{{ old('email_pemesan', auth()->user()->email) }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-purple-500 focus:outline-none">
+                       class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                 @error('email_pemesan')
                 <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -58,7 +58,7 @@
                     <button type="button" onclick="changeQty(-1)"
                             class="bg-gray-700 hover:bg-gray-600 text-white w-10 h-10 rounded-lg font-bold text-xl transition">−</button>
                     <input type="number" name="jumlah" id="jumlah" value="1" min="1" max="{{ min(10, $sisa) }}"
-                           class="w-20 text-center bg-gray-800 border border-gray-600 rounded-xl px-3 py-2 text-white text-xl font-bold focus:border-purple-500 focus:outline-none"
+                           class="w-20 text-center bg-gray-800 border border-gray-600 rounded-xl px-3 py-2 text-white text-xl font-bold focus:border-pink-500 focus:outline-none"
                            onchange="updateTotal()">
                     <button type="button" onclick="changeQty(1)"
                             class="bg-gray-700 hover:bg-gray-600 text-white w-10 h-10 rounded-lg font-bold text-xl transition">+</button>
@@ -67,7 +67,7 @@
             </div>
 
             <button type="submit"
-                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-xl font-bold text-lg transition">
+                    class="w-full bg-pink-600 hover:bg-pink-700 text-white py-4 rounded-xl font-bold text-lg transition">
                 <i class="fas fa-lock mr-2"></i>Konfirmasi Pemesanan
             </button>
         </form>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="flex justify-between">
                     <span class="text-gray-400">Kategori</span>
-                    <span class="bg-purple-900 text-purple-300 px-2 py-0.5 rounded font-bold">{{ $tiket->kategori }}</span>
+                    <span class="bg-pink-900 text-pink-300 px-2 py-0.5 rounded font-bold">{{ $tiket->kategori }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="text-gray-400">Harga Satuan</span>

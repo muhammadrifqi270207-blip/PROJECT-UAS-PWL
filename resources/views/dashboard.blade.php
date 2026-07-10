@@ -6,7 +6,7 @@
 {{-- HEADER --}}
 <div class="mb-8 flex items-center justify-between">
     <div>
-        <h1 class="text-3xl font-bold text-purple-400">
+        <h1 class="text-3xl font-bold text-pink-400">
             <i class="fas fa-chart-line mr-2"></i>Dashboard
         </h1>
         <p class="text-gray-400 mt-1">Selamat datang di sistem manajemen tiket konser</p>
@@ -19,26 +19,26 @@
 
 {{-- STATS CARDS --}}
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <div class="bg-gray-900 border border-purple-800 rounded-xl p-6">
+    <div class="bg-gray-900 border border-pink-800 rounded-xl p-6">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-gray-400 text-sm">Total Konser</p>
                 <p class="text-3xl font-bold text-white mt-1">{{ $totalKonser }}</p>
             </div>
-            <div class="bg-purple-900 p-3 rounded-lg">
-                <i class="fas fa-music text-purple-400 text-xl"></i>
+            <div class="bg-pink-900 p-3 rounded-lg">
+                <i class="fas fa-music text-pink-400 text-xl"></i>
             </div>
         </div>
     </div>
 
-    <div class="bg-gray-900 border border-blue-800 rounded-xl p-6">
+    <div class="bg-gray-900 border border-pink-800 rounded-xl p-6">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-gray-400 text-sm">Konser Aktif</p>
                 <p class="text-3xl font-bold text-white mt-1">{{ $konserAktif }}</p>
             </div>
-            <div class="bg-blue-900 p-3 rounded-lg">
-                <i class="fas fa-calendar-check text-blue-400 text-xl"></i>
+            <div class="bg-pink-900 p-3 rounded-lg">
+                <i class="fas fa-calendar-check text-pink-400 text-xl"></i>
             </div>
         </div>
     </div>
@@ -71,14 +71,14 @@
 {{-- GRAFIK --}}
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
     <div class="bg-gray-900 border border-gray-700 rounded-xl p-6">
-        <h2 class="text-lg font-bold text-purple-400 mb-4">
+        <h2 class="text-lg font-bold text-pink-400 mb-4">
             <i class="fas fa-chart-bar mr-2"></i>Pendapatan 6 Bulan Terakhir
         </h2>
         <canvas id="grafikBulanan" height="200"></canvas>
     </div>
 
     <div class="bg-gray-900 border border-gray-700 rounded-xl p-6">
-        <h2 class="text-lg font-bold text-purple-400 mb-4">
+        <h2 class="text-lg font-bold text-pink-400 mb-4">
             <i class="fas fa-chart-pie mr-2"></i>Tiket Terjual per Konser
         </h2>
         <canvas id="grafikTiket" height="200"></canvas>
@@ -87,7 +87,7 @@
 
 {{-- PROGRESS PENJUALAN --}}
 <div class="bg-gray-900 border border-gray-700 rounded-xl p-6 mb-8">
-    <h2 class="text-lg font-bold text-purple-400 mb-6">
+    <h2 class="text-lg font-bold text-pink-400 mb-6">
         <i class="fas fa-chart-line mr-2"></i>Progress Penjualan Tiket per Konser
     </h2>
     @foreach($grafikKonser as $g)
@@ -112,7 +112,7 @@
 
 {{-- TABEL KONSER TERBARU --}}
 <div class="bg-gray-900 border border-gray-700 rounded-xl p-6">
-    <h2 class="text-xl font-bold text-purple-400 mb-4">
+    <h2 class="text-xl font-bold text-pink-400 mb-4">
         <i class="fas fa-list mr-2"></i>Konser Terbaru
     </h2>
     <table class="w-full text-sm">

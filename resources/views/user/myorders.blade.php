@@ -2,7 +2,7 @@
 @section('title', 'Tiket Saya')
 
 @section('content')
-<h1 class="text-3xl font-bold text-purple-400 mb-6">
+<h1 class="text-3xl font-bold text-pink-400 mb-6">
     <i class="fas fa-ticket mr-2"></i>Tiket Saya
 </h1>
 
@@ -22,11 +22,11 @@
         }
     }
 @endphp
-<div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 mb-4 hover:border-purple-700 transition">
+<div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 mb-4 hover:border-pink-700 transition">
     <div class="flex items-start justify-between mb-4">
         <div>
             <p class="text-gray-400 text-sm">Kode Order</p>
-            <p class="text-xl font-extrabold text-purple-400 tracking-wider">{{ $order->kode_order }}</p>
+            <p class="text-xl font-extrabold text-pink-400 tracking-wider">{{ $order->kode_order }}</p>
             @if($order->nama_pemesan)
             <p class="text-gray-400 text-xs mt-1">Atas nama: <span class="text-white">{{ $order->nama_pemesan }}</span></p>
             @endif
@@ -48,7 +48,7 @@
                 <i class="fas fa-fire mr-1"></i>Segera Mulai!
             </span>
             @elseif($statusKonser === 'upcoming')
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-900 text-blue-400">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-pink-900 text-pink-400">
                 <i class="fas fa-clock mr-1"></i>Akan Datang
             </span>
             @endif
@@ -64,8 +64,8 @@
         <div class="flex-1">
             @foreach($order->items as $item)
             <div class="flex gap-4 items-center mb-3">
-                <div class="w-14 h-14 bg-gradient-to-br from-purple-900 to-gray-800 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-music text-purple-400"></i>
+                <div class="w-14 h-14 bg-gradient-to-br from-pink-900 to-gray-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-music text-pink-400"></i>
                 </div>
                 <div class="flex-1">
                     <p class="font-bold text-white">{{ $item->tiket->konser->nama_konser }}</p>
@@ -77,7 +77,7 @@
                     </p>
                 </div>
                 <div class="text-right">
-                    <span class="bg-purple-900 text-purple-300 text-xs px-2 py-1 rounded font-bold block mb-1">
+                    <span class="bg-pink-900 text-pink-300 text-xs px-2 py-1 rounded font-bold block mb-1">
                         {{ $item->tiket->kategori }}
                     </span>
                     <p class="text-gray-400 text-xs">{{ $item->jumlah }}x tiket</p>
@@ -103,7 +103,7 @@
         </p>
         <div class="flex items-center gap-3">
             <a href="{{ route('user.orders.download', $order) }}"
-               class="bg-blue-700 hover:bg-blue-600 text-white text-xs px-4 py-2 rounded-lg font-bold transition">
+               class="bg-pink-700 hover:bg-pink-600 text-white text-xs px-4 py-2 rounded-lg font-bold transition">
                 <i class="fas fa-download mr-1"></i>Download PDF
             </a>
             <p class="font-bold text-white">
@@ -116,7 +116,7 @@
 <div class="text-center py-20 text-gray-500">
     <i class="fas fa-ticket text-6xl mb-4 block text-gray-700"></i>
     <p class="text-xl">Kamu belum punya tiket</p>
-    <a href="{{ route('user.home') }}" class="text-purple-400 mt-3 inline-block hover:underline">
+    <a href="{{ route('user.home') }}" class="text-pink-400 mt-3 inline-block hover:underline">
         Cari konser sekarang →
     </a>
 </div>

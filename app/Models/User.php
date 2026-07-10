@@ -43,4 +43,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function show($id)
+    {
+        $konser = Konser::with('tikets')->findOrFail($id);
+        return view('user.konser.show', compact('konser'));
+    }
 }

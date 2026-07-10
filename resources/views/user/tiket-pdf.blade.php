@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <style>
         body { font-family: Arial, sans-serif; background: #fff; color: #333; margin: 0; padding: 20px; }
-        .ticket { border: 3px solid #7c3aed; border-radius: 12px; padding: 30px; max-width: 600px; margin: 0 auto; }
-        .header { text-align: center; border-bottom: 2px dashed #7c3aed; padding-bottom: 20px; margin-bottom: 20px; }
-        .header h1 { color: #7c3aed; font-size: 28px; margin: 0; }
+        .ticket { border: 3px solid #ec4899; border-radius: 12px; padding: 30px; max-width: 600px; margin: 0 auto; }
+        .header { text-align: center; border-bottom: 2px dashed #ec4899; padding-bottom: 20px; margin-bottom: 20px; }
+        .header h1 { color: #ec4899; font-size: 28px; margin: 0; }
         .header p { color: #666; margin: 5px 0; }
-        .kode { text-align: center; background: #f3f0ff; border-radius: 8px; padding: 15px; margin: 20px 0; }
-        .kode h2 { color: #7c3aed; font-size: 32px; font-weight: bold; margin: 0; letter-spacing: 4px; }
+        .kode { text-align: center; background: #fdf2f8; border-radius: 8px; padding: 15px; margin: 20px 0; }
+        .kode h2 { color: #ec4899; font-size: 32px; font-weight: bold; margin: 0; letter-spacing: 4px; }
         .kode p { color: #666; font-size: 12px; margin: 5px 0 0; }
         .info { margin: 20px 0; }
         .info table { width: 100%; border-collapse: collapse; }
         .info table td { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
         .info table td:first-child { color: #666; width: 40%; }
         .info table td:last-child { font-weight: bold; color: #333; }
-        .total { text-align: right; background: #f3f0ff; border-radius: 8px; padding: 15px; margin-top: 20px; }
+        .total { text-align: right; background: #fdf2f8; border-radius: 8px; padding: 15px; margin-top: 20px; }
         .total p { margin: 0; color: #666; font-size: 14px; }
-        .total h3 { margin: 5px 0 0; color: #7c3aed; font-size: 24px; }
-        .footer { text-align: center; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #7c3aed; }
+        .total h3 { margin: 5px 0 0; color: #ec4899; font-size: 24px; }
+        .footer { text-align: center; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #ec4899; }
         .footer p { color: #999; font-size: 12px; margin: 3px 0; }
         .status { display: inline-block; background: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
     </style>
@@ -36,7 +36,7 @@
         <p style="margin-bottom:10px; color:#666; font-size:13px;">Tunjukkan QR Code ini saat masuk venue</p>
         <img src="data:image/svg+xml;base64,{{ base64_encode(QrCode::format('svg')->size(180)->generate($order->kode_order)) }}" 
          style="width:180px; height:180px;">
-        <p style="margin-top:8px; color:#7c3aed; font-size:13px; font-weight:bold;">{{ $order->kode_order }}</p>
+        <p style="margin-top:8px; color:#ec4899; font-size:13px; font-weight:bold;">{{ $order->kode_order }}</p>
     </div>
 
     @foreach($order->items as $item)

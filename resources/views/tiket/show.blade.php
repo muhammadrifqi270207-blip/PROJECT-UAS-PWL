@@ -6,7 +6,7 @@
     <a href="{{ route('konser.index') }}" class="text-gray-400 hover:text-white text-sm">
         <i class="fas fa-arrow-left mr-1"></i> Kembali
     </a>
-    <h1 class="text-3xl font-bold text-blue-400 mt-2">
+    <h1 class="text-3xl font-bold text-pink-400 mt-2">
         <i class="fas fa-info-circle mr-2"></i>Detail Konser
     </h1>
 </div>
@@ -28,7 +28,7 @@
             @endif
 
             <h2 class="text-xl font-bold text-white">{{ $konser->nama_konser }}</h2>
-            <p class="text-purple-400 font-medium mt-1">{{ $konser->artis }}</p>
+            <p class="text-pink-400 font-medium mt-1">{{ $konser->artis }}</p>
 
             <div class="mt-4 space-y-2 text-sm text-gray-400">
                 <div class="flex items-center gap-2">
@@ -73,11 +73,11 @@
     <div class="lg:col-span-2">
         <div class="bg-gray-900 border border-gray-700 rounded-xl p-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-purple-400">
+                <h3 class="text-lg font-bold text-pink-400">
                     <i class="fas fa-ticket mr-2"></i>Tiket Tersedia
                 </h3>
                 <a href="{{ route('tiket.create') }}"
-                   class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded-lg text-sm transition">
+                   class="bg-pink-600 hover:bg-pink-700 text-white px-3 py-1 rounded-lg text-sm transition">
                     <i class="fas fa-plus mr-1"></i> Tambah Tiket
                 </a>
             </div>
@@ -86,7 +86,7 @@
             <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-3">
                 <div class="flex items-center justify-between">
                     <div>
-                        <span class="bg-purple-900 text-purple-300 px-3 py-1 rounded-full text-sm font-bold">
+                        <span class="bg-pink-900 text-pink-300 px-3 py-1 rounded-full text-sm font-bold">
                             {{ $tiket->kategori }}
                         </span>
                         <p class="text-green-400 font-bold mt-2 text-lg">
@@ -136,7 +136,7 @@
             <div class="text-center py-8 text-gray-500">
                 <i class="fas fa-ticket text-4xl mb-3 block"></i>
                 Belum ada tiket untuk konser ini.
-                <a href="{{ route('tiket.create') }}" class="text-purple-400 block mt-2">+ Tambah tiket sekarang</a>
+                <a href="{{ route('tiket.create') }}" class="text-pink-400 block mt-2">+ Tambah tiket sekarang</a>
             </div>
             @endforelse
         </div>

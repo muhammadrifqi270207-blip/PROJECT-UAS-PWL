@@ -6,7 +6,7 @@
     <a href="{{ route('tiket.index') }}" class="text-gray-400 hover:text-white text-sm">
         <i class="fas fa-arrow-left mr-1"></i> Kembali
     </a>
-    <h1 class="text-3xl font-bold text-purple-400 mt-2">
+    <h1 class="text-3xl font-bold text-pink-400 mt-2">
         <i class="fas fa-plus-circle mr-2"></i>Tambah Tiket Baru
     </h1>
 </div>
@@ -18,7 +18,7 @@
             <div>
                 <label class="text-gray-300 text-sm block mb-1">Konser</label>
                 <select name="konser_id"
-                        class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none">
+                        class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-pink-500 focus:outline-none">
                     <option value="">-- Pilih Konser --</option>
                     @foreach($konsers as $konser)
                     <option value="{{ $konser->id }}" {{ old('konser_id') == $konser->id ? 'selected' : '' }}>
@@ -32,7 +32,7 @@
             <div>
                 <label class="text-gray-300 text-sm block mb-1">Kategori Tiket</label>
                 <input type="text" name="kategori" value="{{ old('kategori') }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none"
+                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-pink-500 focus:outline-none"
                        placeholder="e.g. VIP, VVIP, Festival, Tribune">
                 @error('kategori')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
@@ -40,7 +40,7 @@
             <div>
                 <label class="text-gray-300 text-sm block mb-1">Harga (Rp)</label>
                 <input type="number" name="harga" value="{{ old('harga') }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none"
+                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-pink-500 focus:outline-none"
                        placeholder="e.g. 500000">
                 @error('harga')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
@@ -48,7 +48,7 @@
             <div>
                 <label class="text-gray-300 text-sm block mb-1">Kuota Tiket</label>
                 <input type="number" name="kuota" value="{{ old('kuota') }}"
-                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none"
+                       class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-pink-500 focus:outline-none"
                        placeholder="e.g. 1000">
                 @error('kuota')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
@@ -56,7 +56,7 @@
 
         <div class="mt-6 flex gap-3">
             <button type="submit"
-                    class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition">
+                    class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg transition">
                 <i class="fas fa-save mr-2"></i>Simpan Tiket
             </button>
             <a href="{{ route('tiket.index') }}"

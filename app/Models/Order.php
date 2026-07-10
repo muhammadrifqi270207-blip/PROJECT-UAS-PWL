@@ -24,4 +24,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function tiket() 
+    {
+        return $this->belongsTo(Tiket::class);
+    }
 }

@@ -9,10 +9,21 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\CheckoutController;
-use App\Http\Controllers\User\WishlistController; // Controller baru kita
+use App\Http\Controllers\User\WishlistController;
+use App\Models\Konser;
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    $konsers = \App\Models\Konser::with('tikets')
+        ->where('status', 'aktif')
+        ->latest()
+        ->take(3)
+        ->get();
+
+    $terlaris_id = $konsers->sortByDesc(function($k) {
+        return $k->tikets->sum('terjual');
+    })->first()?->id;
+
+    return view('landing', compact('konsers', 'terlaris_id'));
 });
 
 // ------------------ GUEST / AUTH VIA LOGIN-REGISTER ------------------
@@ -44,6 +55,10 @@ Route::middleware(['auth', 'user'])->prefix('home')->name('user.')->group(functi
     Route::post('/notifications/read/{konser}', [HomeController::class, 'markRead'])->name('notifications.read');
     Route::post('/chatbot', [HomeController::class, 'chatbot'])->name('chatbot');
     Route::post('/review/{konser}', [HomeController::class, 'storeReview'])->name('review.store');
+    Route::get('/checkout/{id}', [CheckoutController::class, 'show'])->name('checkout.show');
+    Route::post('/checkout/{order}/bayar', [CheckoutController::class, 'bayarManual'])->name('checkout.bayar');
+    Route::post('/checkout/{order}/batal', [CheckoutController::class, 'batalManual'])->name('checkout.batal');
+
 
     // FITUR WISHLIST BARU (Menggunakan WishlistController agar Log Aktivitas Tercatat)
     Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
