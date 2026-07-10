@@ -35,7 +35,7 @@
             <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight h-[60px] md:h-[70px] flex items-center justify-center">
                 <span x-data="{ 
                     text: '', 
-                    fullText: 'Temukan Konser Favoritmu!', 
+                    fullText: 'ANdalan Tiket Konser Original', 
                     currentIndex: 0,
                     init() {
                         let timer = setInterval(() => {
